@@ -102,6 +102,17 @@ ax.set_ylabel("Count")
 ax.set_title("Sentiment Analysis Results")
 st.pyplot(fig)
 
+# Performance Metrics Graph
+st.subheader("📊 Performance Metrics Visualization")
+metrics = ["Accuracy", "Precision", "Recall", "F1 Score"]
+values = [accuracy, precision, recall, f1_score]
+fig, ax = plt.subplots()
+ax.bar(metrics, values, color=['blue', 'orange', 'green', 'purple'])
+ax.set_ylim(0, 1)
+ax.set_ylabel("Score")
+ax.set_title("Model Performance")
+st.pyplot(fig)
+
 # Footer
 st.markdown(
     """
