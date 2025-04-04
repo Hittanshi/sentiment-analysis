@@ -87,12 +87,7 @@ if st.button("Analyze Sentiment"):
     else:
         st.warning("Please enter a review before analyzing.")
 
-# Metrics Display
-st.subheader("📊 Model Performance Metrics")
-st.metric(label="Accuracy", value=f"{accuracy*100:.2f}%")
-st.metric(label="Precision", value=f"{precision*100:.2f}%")
-st.metric(label="Recall", value=f"{recall*100:.2f}%")
-st.metric(label="F1 Score", value=f"{f1_score*100:.2f}%")
+
 
 # Sentiment Distribution Graph
 st.subheader("📈 Sentiment Distribution")
