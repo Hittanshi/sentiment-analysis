@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import re
-import matplotlib.pyplot as plt
 import numpy as np
 
 # Function to preprocess text
@@ -13,12 +12,6 @@ def preprocess_text(text):
 # Load the trained model
 with open('sentiment_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
-
-# Sample model metrics (replace with actual values if available)
-accuracy = 0.92
-precision = 0.89
-recall = 0.91
-f1_score = 0.90
 
 # Sentiment counts (for visualization)
 sentiment_counts = {"Positive": 0, "Negative": 0}
@@ -86,28 +79,7 @@ if st.button("Analyze Sentiment"):
         )
     else:
         st.warning("Please enter a review before analyzing.")
-
-
-
-# Sentiment Distribution Graph
-st.subheader("📈 Sentiment Distribution")
-fig, ax = plt.subplots()
-ax.bar(sentiment_counts.keys(), sentiment_counts.values(), color=['green', 'red'])
-ax.set_ylabel("Count")
-ax.set_title("Sentiment Analysis Results")
-st.pyplot(fig)
-
-# Performance Metrics Graph
-st.subheader("📊 Performance Metrics Visualization")
-metrics = ["Accuracy", "Precision", "Recall", "F1 Score"]
-values = [accuracy, precision, recall, f1_score]
-fig, ax = plt.subplots()
-ax.bar(metrics, values, color=['blue', 'orange', 'green', 'purple'])
-ax.set_ylim(0, 1)
-ax.set_ylabel("Score")
-ax.set_title("Model Performance")
-st.pyplot(fig)
-
+        
 # Footer
 st.markdown(
     """
