@@ -1,8 +1,6 @@
 import streamlit as st
 import pickle
 import re
-import time
-import random
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -12,7 +10,7 @@ def preprocess_text(text):
     text = re.sub(r'[^a-zA-Z\s]', '', text)
     return text
 
-# Load the trained model and metrics
+# Load the trained model
 with open('sentiment_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
@@ -28,10 +26,10 @@ sentiment_counts = {"Positive": 0, "Negative": 0}
 def predict_sentiment(review):
     processed_review = preprocess_text(review)
     prediction = model.predict([processed_review])
-    sentiment = '😊 Positive' if prediction[0] == 1 else '☹️ Negative'
+    sentiment = 'Positive' if prediction[0] == 1 else 'Negative'
     
     # Update sentiment counts
-    sentiment_counts["Positive" if prediction[0] == 1 else "Negative"] += 1
+    sentiment_counts[sentiment] += 1
     return sentiment
 
 # Streamlit App UI
@@ -43,7 +41,7 @@ st.markdown(
             border-radius: 10px;
         }
         .stTextArea textarea {
-            
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 5px;
         }
         .footer {
@@ -69,10 +67,10 @@ user_input = st.text_area("Write your review here:")
 if st.button("Analyze Sentiment"):
     if user_input.strip():
         sentiment = predict_sentiment(user_input)
-        st.subheader(f"Sentiment: {sentiment}")
+        st.subheader(f"Sentiment: {'😊 Positive' if sentiment == 'Positive' else '☹️ Negative'}")
         
         # Change background color and show balloons for positive sentiment
-        if "Positive" in sentiment:
+        if sentiment == "Positive":
             st.balloons()
             color = "#ccffcc"  # Green for positive
         else:
@@ -115,8 +113,4 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
